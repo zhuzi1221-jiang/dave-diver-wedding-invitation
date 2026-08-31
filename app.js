@@ -1,5 +1,5 @@
 const weddingDate = new Date('2026-10-24T11:58:00+08:00')
-// 需要真实收集宾客名单时，只需粘贴第三方表单的公开填写链接；留空则保持本地演示模式。
+// 需要真实收集宾客名单时，只需粘贴第三方表单的公开填写链接；留空则保持本地保存模式。
 const RSVP_FORM_URL = 'https://docs.qq.com/form/page/DV1VBV2VyS1BFZ2ta'
 document.querySelector('#days-count').textContent = String(Math.max(0, Math.ceil((weddingDate.getTime() - Date.now()) / 86400000)))
 
@@ -166,7 +166,7 @@ if (publicRsvpUrl) {
   const rsvpSuccessTitle = document.querySelector('#rsvp-success-title')
   const rsvpSuccessSummary = document.querySelector('#rsvp-success-summary')
   const rsvpSubmit = rsvpForm.querySelector('[type="submit"]')
-  const storageKey = 'dave-wedding-demo-rsvp'
+  const storageKey = 'dave-wedding-rsvp'
   let savedRsvp
   try { savedRsvp = JSON.parse(localStorage.getItem(storageKey)) } catch { savedRsvp = undefined }
   function updateAccommodation() {
@@ -192,11 +192,11 @@ if (publicRsvpUrl) {
     event.preventDefault(); rsvpError.hidden = true
     let submission
     try { submission = collectRsvp() } catch (error) { showRsvpError(error.message); return }
-    rsvpSubmit.disabled = true; rsvpSubmit.querySelector('span').textContent = '正在保存演示登记……'
+    rsvpSubmit.disabled = true; rsvpSubmit.querySelector('span').textContent = '正在保存登记……'
     try {
-      savedRsvp = { ...submission, id: 'demo-local-only', editToken: undefined }
+      savedRsvp = { ...submission, id: 'local-only', editToken: undefined }
       localStorage.setItem(storageKey, JSON.stringify(savedRsvp))
-      rsvpForm.hidden = true; rsvpSuccess.hidden = false; rsvpSuccessTitle.textContent = `${submission.guestName}，演示登记成功`; rsvpSuccessSummary.textContent = `已在本机保存 ${submission.partySize} 人的演示记录${submission.needsAccommodation ? ' · 已登记住宿需求' : ' · 无需住宿'}；这些内容不会上传。`; rsvpSuccess.focus({ preventScroll: true })
+      rsvpForm.hidden = true; rsvpSuccess.hidden = false; rsvpSuccessTitle.textContent = `${submission.guestName}，登记成功`; rsvpSuccessSummary.textContent = `已在本机保存 ${submission.partySize} 人的登记记录${submission.needsAccommodation ? ' · 已登记住宿需求' : ' · 无需住宿'}；这些内容不会上传。`; rsvpSuccess.focus({ preventScroll: true })
     } catch (error) { showRsvpError(error.message || '保存失败，请检查浏览器设置后重试。') }
     finally { rsvpSubmit.disabled = false; rsvpSubmit.querySelector('span').textContent = '保存赴约信息' }
   })
