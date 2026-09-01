@@ -47,6 +47,18 @@ window.addEventListener('load', () => {
   })
 })
 
+// 动图视频：滚动进入视口时由 JS 触发播放（微信对自动播放限制较严，JS 触发更可靠）
+document.querySelectorAll('video').forEach((video) => {
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) { video.pause(); return }
+      const promise = video.play()
+      if (promise && promise.catch) promise.catch(() => {})
+    })
+  }, { threshold: 0.1 })
+  videoObserver.observe(video)
+})
+
 const bubbleField = document.querySelector('.bubble-field')
 for (let index = 0; index < 28; index += 1) {
   const bubble = document.createElement('i')
