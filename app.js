@@ -29,6 +29,24 @@ if ('IntersectionObserver' in window) {
   lazyImgs.forEach((img) => lazyLoader.observe(img))
 }
 
+// 加载完成淡出加载页；兜底 4 秒强制隐藏，避免长时间黑屏
+const loader = document.getElementById('loader')
+function hideLoader() {
+  if (!loader || loader.dataset.done) return
+  loader.dataset.done = '1'
+  loader.classList.add('loader-done')
+  window.setTimeout(() => { loader.remove() }, 700)
+}
+window.addEventListener('load', hideLoader)
+window.setTimeout(hideLoader, 4000)
+
+// 预加载蓝洞小队 4 张角色图，切换成员时不再等待下载
+window.addEventListener('load', () => {
+  document.querySelectorAll('.crew-slide img').forEach((img) => {
+    const clone = new Image(); clone.src = img.src
+  })
+})
+
 const bubbleField = document.querySelector('.bubble-field')
 for (let index = 0; index < 28; index += 1) {
   const bubble = document.createElement('i')
