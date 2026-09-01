@@ -22,6 +22,13 @@
     <script type="module" src="./app.js?v=20260901"></script>
   </head>
   <body>
+    <div id="loader" class="loader" role="status" aria-label="正在加载">
+      <div class="loader-inner">
+        <div class="loader-sonar"><i></i><b>🐟</b></div>
+        <p class="loader-title">正在下潜</p>
+        <p class="loader-sub">DIVING TO THE BLUE HOLE…</p>
+      </div>
+    </div>
     <main class="phone-shell">
       <section class="hero" id="top">
         <img class="hero-art" src="./assets/dave-key-art-clean.webp" alt="蓝洞海面场景" fetchpriority="high" />
@@ -55,7 +62,7 @@
         </article>
         <div class="mission-complete" id="mission-complete" role="status" aria-live="polite"><b>MISSION ACCEPTED</b><span>赴约任务已加入清单</span></div>
         <div class="exploration-frame reveal">
-          <img src="./assets/sea-exploration.webp" alt="潜水员戴夫海底探索动画" loading="lazy" /><div class="camera-corners" aria-hidden="true"></div>
+          <video src="./assets/sea-exploration.mp4" autoplay loop muted playsinline preload="auto" aria-label="潜水员戴夫海底探索动画"></video><div class="camera-corners" aria-hidden="true"></div>
           <button class="sonar-button" id="sonar-button" type="button" aria-label="释放声呐">SONAR</button><div class="sonar-field" aria-hidden="true"></div>
         </div>
         <p class="scene-caption reveal fish-caption">点击海里的鱼试试看 <b class="fish-arrow" aria-hidden="true">↓</b><small>随机收取祝福</small></p><div class="fish-field" id="fish-field" aria-label="可以捕捉的像素鱼"></div>
@@ -77,7 +84,7 @@
 
       <section class="schedule-section story-section" id="schedule">
         <header class="section-title light reveal"><span>03</span><div><p>BANCHO SUSHI · TODAY'S SPECIAL</p><h2>婚礼当日菜单</h2></div></header>
-        <div class="restaurant-screen reveal"><img src="./assets/sushi-service.webp" alt="班乔寿司店营业动画" loading="lazy" /><div class="restaurant-status"><i></i><span>OPEN FOR WEDDING</span></div></div>
+        <div class="restaurant-screen reveal"><video src="./assets/sushi-service.mp4" autoplay loop muted playsinline preload="auto" aria-label="班乔寿司店营业动画"></video><div class="restaurant-status"><i></i><span>OPEN FOR WEDDING</span></div></div>
         <div class="menu-board reveal">
           <p class="board-title">TODAY'S SPECIAL COURSE</p>
           <article><time>14:30</time><div><b>海面集合</b><span>迎宾 · 合影 · 与新人会合</span></div><strong>★</strong></article>
