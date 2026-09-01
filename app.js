@@ -1,4 +1,4 @@
-const weddingDate = new Date('2026-10-24T11:58:00+08:00')
+const weddingDate = new Date('2026-10-24T00:00:00+08:00')
 // 需要真实收集宾客名单时，只需粘贴第三方表单的公开填写链接；留空则保持本地保存模式。
 const RSVP_FORM_URL = 'https://docs.qq.com/form/page/DV1VBV2VyS1BFZ2ta'
 document.querySelector('#days-count').textContent = String(Math.max(0, Math.ceil((weddingDate.getTime() - Date.now()) / 86400000)))
