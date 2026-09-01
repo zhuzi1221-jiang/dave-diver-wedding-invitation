@@ -14,6 +14,21 @@ if ('IntersectionObserver' in window && !reducedMotion) {
   revealElements.forEach((element) => revealObserver.observe(element))
 } else revealElements.forEach((element) => element.classList.add('is-visible'))
 
+// 提前加载懒加载图片：进入视口前约一屏（600px）就开始下载，滚动到时不再等待
+if ('IntersectionObserver' in window) {
+  const lazyImgs = document.querySelectorAll('img[loading="lazy"]')
+  const lazyLoader = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return
+      const img = entry.target
+      img.loading = 'eager'
+      img.decoding = 'async'
+      lazyLoader.unobserve(img)
+    })
+  }, { rootMargin: '0px 0px 600px 0px' })
+  lazyImgs.forEach((img) => lazyLoader.observe(img))
+}
+
 const bubbleField = document.querySelector('.bubble-field')
 for (let index = 0; index < 28; index += 1) {
   const bubble = document.createElement('i')
